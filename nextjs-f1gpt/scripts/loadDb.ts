@@ -5,3 +5,13 @@ import OpenAI from "openai";
 import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
 
 import "dotenv/config";
+
+const {
+  ASTRA_DB_NAMESPACE,
+  ASTRA_DB_COLLECTION,
+  ASTRA_DB_ENDPOINT,
+  ASTRA_DB_APPLICATION_TOKEN,
+  OPENAI_APIKEY,
+} = process.env;
+
+const openai = new OpenAI({ apikey: OPENAI_API_KEY });
