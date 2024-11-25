@@ -6,6 +6,8 @@ import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
 
 import "dotenv/config";
 
+type SimilarityMetric = "dot_product" | "cosine" | "euclidean";
+
 const {
   ASTRA_DB_NAMESPACE,
   ASTRA_DB_COLLECTION,
@@ -28,3 +30,14 @@ const splitter = new RecursiveCharacterTextSplitter({
   chunkSize: 512,
   chunkOverlap: 100,
 });
+
+const createCollection = async (
+  SimilarityMetric: SimilarityMetric = "dot_product"
+) => {
+  const res = await db.createCollection(ASTRA_DB_COLLECTION, {
+    vector: {
+      dimension: 1536,
+      metric: SimilarityMetric,
+    },
+  });
+};
