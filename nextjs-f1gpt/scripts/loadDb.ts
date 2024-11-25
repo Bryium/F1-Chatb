@@ -42,3 +42,26 @@ const createCollection = async (
   });
   console.log(res);
 };
+
+const loadSampleData = async () => {
+  const collection = await db.collection(ASTRA_DB_COLLECTION);
+  for await (const url of f1Data) {
+    const content = await scrapePage(url);
+    const chunks = await splitter.splitText(content);
+    for await (const chunk of chunks) {
+      const embedding = await openai.embeddings.create({
+        model: "text-embedding-3-small",
+        input: chunk,
+        encoding_format: "float",
+      });
+
+      const vector = embedding.data[0].embedding;
+
+      const res = await collection.insertOne({
+        $vector: vector,
+        text: chunk.
+      })
+      console.log(res)
+    }
+  }
+};
