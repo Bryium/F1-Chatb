@@ -40,4 +40,5 @@ const createCollection = async (
       metric: SimilarityMetric,
     },
   });
+  console.log(res);
 };
