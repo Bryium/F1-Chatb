@@ -15,3 +15,5 @@ const {
 } = process.env;
 
 const openai = new OpenAI({ apikey: OPENAI_API_KEY });
+
+const f1Data = ["https://en.wikipedia.org/wiki/Formula_One"];
